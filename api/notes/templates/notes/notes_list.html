@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Заметки</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Это must-have для адаптации! -->
+    <style>
+body { font-family: Arial, sans-serif; background: #fffdf6; margin: 0;}
+        .header{
+            width: 100%;
+            background: #ff9800;
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.3rem;
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-sizing: border-box;
+        }
+        .header a {
+            margin-right: 48px;
+            background: #fff;
+            color: #ff9800;
+            padding: 7px 21px;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 5px;
+            border: 1px solid #fff;
+            transition: background .18s;
+        }
+        .header a:hover {
+            background: #ffe0b2;
+            border: 1px solid #ff9800;
+        }
+        .task-list {
+            max-width: 400px;
+            margin: 34px auto 70px auto;
+            padding: 0 10px;
+        }
+        .task-card {
+            background: #fffbea;
+            border-radius: 8px;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.06);
+            margin-bottom: 18px;
+            padding: 15px 13px;
+            word-break: break-word;
+            position: relative;
+            cursor: pointer;
+            transition: box-shadow 0.2s;
+        }
+        .task-card.open { box-shadow: 0 4px 14px rgba(255,152,0,0.15);}
+        .note-title-accordion {
+            cursor: pointer;
+            padding: 8px 0;
+            color: #444;
+            font-size: 1.13rem;
+            font-weight: bold;
+            transition: color .15s;
+        }
+        .note-title-accordion:hover { color: #ff9800; }
+        .note-body {
+            display: none;
+            margin-top: 8px;
+            color: #757575;
+            font-size: 0.98em;
+            line-break: anywhere;
+            background: #fff3e0;
+            border-radius: 6px;
+            padding: 9px 12px;
+        }
+        .task-card.open .note-body {
+            display: block;
+            animation: fadeIn 0.18s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0;}
+            to   { opacity: 1;}
+        }
+        .task-date {
+            font-size: 0.94em;
+            color: #ff9800;
+            margin-top: 9px;
+            margin-bottom: 4px;
+            text-align:right;
+        }
+        .delete-btn {
+            background: #fff3e0;
+            color: #b02a37;
+            border: 0;
+            border-radius: 4px;
+            margin-top: 8px;
+            cursor:pointer;
+            font-size: 0.99em;
+            padding: 4px 15px;
+            float:right;
+        }
+        .footer-menu {
+            position: fixed;
+            left: 0; bottom: 0; width: 100%;
+            background: #ffae38;
+            border-radius: 0 0 10px 10px;
+            display: flex; justify-content: center;
+            box-shadow: 0 -3px 14px rgba(254,147,0,0.05);
+            z-index: 99;
+        }
+        .footer-menu nav {width: 100%; display: flex;}
+        .footer-menu button {
+            background: none; border: none; flex: 1;
+            padding: 12px 0; color: #fff; text-align: center;
+            font-size: 1em; cursor: pointer;
+        }
+        .footer-menu button .icon {display: block; font-size: 1.5em;}
+        .footer-menu button.selected {
+            background: #ffa400;
+            border-radius: 8px 8px 0 0;
+        }
+
+        /* ------- Мобильная адаптация --------*/
+        @media (max-width: 600px) {
+            .header {
+                padding: 15px 6vw 12px 6vw;
+                font-size: 1.07rem;
+            }
+            .header a {
+                margin-right: 10px;
+                padding: 5px 10px;
+                font-size: 0.96rem;
+            }
+            .task-list {
+                max-width: 98vw;
+                margin: 18px auto 63px auto;
+                padding: 0 2vw;
+            }
+            .task-card {
+                padding: 11px 7px;
+                font-size: 1em;
+            }
+            .note-title-accordion {
+                font-size: 1em;
+            }
+            .note-body {
+                padding: 6px 5vw 6px 3vw;
+                font-size: 0.95em;
+            }
+            .task-date {
+                font-size: 0.89em;
+            }
+            .delete-btn {
+                padding: 4px 11px;
+                font-size: 0.93em;
+            }
+            .footer-menu {
+                font-size: 0.94em;
+                border-radius: 0;
+            }
+        }
+        nav {
+    display: flex;
+    justify-content: space-around;
+    background: #ffb746;
+    padding: 10px 0;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.04);
+}
+.nav-btn {
+    background: transparent;
+    border: none;
+    outline: none;
+    text-align: center;
+    flex: 1 1 0;
+    cursor: pointer;
+    padding: 10px 0 6px 0;
+    color: #232323;
+    transition: background 0.17s, color 0.17s, box-shadow 0.12s;
+    position: relative;
+    font-size: 15px;
+}
+.nav-btn .icon {
+    display: block;
+    margin-bottom: 2px;
+    font-size: 1.5em;
+    transition: color 0.14s;
+    color: #232323;
+}
+.nav-btn:hover,
+.nav-btn:focus {
+    background: #ffe0b2;
+    color: #e65100;
+}
+.nav-btn:hover .icon,
+.nav-btn:focus .icon {
+    color: #e65100;
+}
+.nav-btn.active {
+    background: #ffe0b2;
+    color: #e65100;
+    font-weight: 600;
+}
+.nav-btn.active .icon {
+    color: #e65100;
+}
+.nav-btn.active::after {
+    content: "";
+    display: block;
+    height: 3px;
+    width: 100%;
+    background: #e65100;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-radius: 2px 2px 0 0;
+}
+        .notes-icon {
+    color: #232323 !important; /* Всегда тёмная, перебьёт даже active и hover */
+}
+    </style>
+</head>
+<body>
+<div class="header">
+    <span>Твои заметки</span>
+    <a href="{% url 'add_note' %}">+ Новая заметка</a>
+</div>
+
+<div class="task-list">
+    {% for note in notes %}
+        <div class="task-card note-card" onclick="toggleNote(this)">
+            <div class="note-title-accordion">
+                {{ note.title|default:"Без названия" }}
+            </div>
+            <div class="note-body">
+                {{ note.body|linebreaks }}
+                <div class="task-date">{{ note.updated_at|date:"d.m.Y H:i" }}</div>
+                <form action="{% url 'delete_note' note.id %}" method="post" style="margin:10px 0 0 0;display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="delete-btn" onclick="event.stopPropagation();return confirm('Удалить заметку?');">Удалить</button>
+                </form>
+            </div>
+        </div>
+    {% empty %}
+        <p style="color:#999; text-align:center;">Заметок пока нет.</p>
+    {% endfor %}
+</div>
+
+<footer class="footer-menu">
+       <nav>
+    <button class="nav-btn {% if request.resolver_match.url_name == 'index' %}active{% endif %}"
+        onclick="window.location.href='{% url 'index' %}'">
+        <span class="icon">&#8962;</span>
+        Главный
+    </button>
+    <button class="nav-btn {% if request.resolver_match.url_name == 'notes_list' %}active{% endif %}"
+        onclick="window.location.href='{% url 'notes_list' %}'">
+        <span class="icon notes-icon">&#128197;</span>
+        Заметки
+    </button>
+    <button class="nav-btn {% if request.resolver_match.url_name == 'tasks' %}active{% endif %}"
+        onclick="window.location.href='{% url 'tasks' %}'">
+        <span class="icon">&#9776;</span>
+        Задачи
+    </button>
+    <button class="nav-btn {% if request.resolver_match.url_name == 'profile' %}active{% endif %}"
+        onclick="window.location.href='{% url 'profile' %}'">
+        <span class="icon">&#128100;</span>
+        Кабинет
+    </button>
+</nav>
+    </footer>
+<script>
+    // Accordion logic: раскрытие/скрытие заметки
+    function toggleNote(card) {
+        card.classList.toggle('open');
+    }
+    // Отключить разворачивание при клике по кнопке "Удалить"
+    document.querySelectorAll('.note-card form').forEach(f=> {
+        f.addEventListener('click',e=>e.stopPropagation());
+    });
+</script>
+</body>
+</html>
