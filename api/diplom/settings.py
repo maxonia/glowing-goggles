@@ -30,9 +30,27 @@ SECRET_KEY = os.environ.get('django-insecure-9i!*meb=fzluyh%9qmo1&(j*gcf$^c-)h6j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DJANGO_DEBUG', '') == 'True'
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+    'glowing-goggles-production.up.railway.app',  # ТВОЙ домен Railway
+    'localhost',
+    '127.0.0.1',
+]
+import sys
 
-
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'stream': sys.stdout,
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'DEBUG',
+    },
+}
 # Application definition
 
 INSTALLED_APPS = [
@@ -47,6 +65,7 @@ INSTALLED_APPS = [
     'notes',
 ]
 
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
