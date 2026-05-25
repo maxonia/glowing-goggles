@@ -30,7 +30,10 @@ SECRET_KEY = os.environ.get('django-insecure-9i!*meb=fzluyh%9qmo1&(j*gcf$^c-)h6j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DJANGO_DEBUG', '') == 'True'
 
-ALLOWED_HOSTS = ['https://glowing-goggles-production.up.railway.app']
+ALLOWED_HOSTS = [
+    'glowing-goggles-production.up.railway.app',  # ТВОЙ домен Railway
+    'localhost',
+    '127.0.0.1',
 
 import sys
 
