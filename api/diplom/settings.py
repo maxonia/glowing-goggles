@@ -25,7 +25,7 @@ DATABASES = {
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('django-insecure-9i!*meb=fzluyh%9qmo1&(j*gcf$^c-)h6jn#5z&w+=_nubpg)')
+SECRET_KEY = os.environ.get('SECRET_KEY', "django-insecure-9i!*meb=fzluyh%9qmo1&(j*gcf$^c-)h6jn#5z&w+=_nubpg)")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DJANGO_DEBUG', '') == 'True'
