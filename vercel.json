@@ -1,13 +1,8 @@
 {
   "functions": {
-    "api/diplom/**/*.py": {
-      "runtime": "python3.9"
-    }
+    "api/diplom/**.py": { "runtime": "vercel-python@0.7.0" }
   },
   "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/api/diplom/django_handler.py"
-    }
+    { "src": "/(.*)", "dest": "/api/diplom/django_handler.py" }
   ]
 }
