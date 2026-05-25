@@ -34,7 +34,7 @@ ALLOWED_HOSTS = [
     'glowing-goggles-production.up.railway.app',  # ТВОЙ домен Railway
     'localhost',
     '127.0.0.1',
-
+]
 import sys
 
 LOGGING = {
