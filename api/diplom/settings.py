@@ -39,7 +39,7 @@ ALLOWED_HOSTS = [
 
 CSRF_TRUSTED_ORIGINS = [
     "https://*.railway.app",
-    "glowing-goggles-production.up.railway.app"
+    "https://glowing-goggles-production.up.railway.app"
 ]
 import sys
 
