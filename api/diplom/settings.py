@@ -31,9 +31,15 @@ SECRET_KEY = os.environ.get('django-insecure-9i!*meb=fzluyh%9qmo1&(j*gcf$^c-)h6j
 DEBUG = os.environ.get('DJANGO_DEBUG', '') == 'True'
 
 ALLOWED_HOSTS = [
-    'glowing-goggles-production.up.railway.app',  # ТВОЙ домен Railway
+    ".railway.app",
     'localhost',
     '127.0.0.1',
+    'glowing-goggles-production.up.railway.app',  # ТВОЙ домен Railway
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://*.railway.app",
+    "glowing-goggles-production.up.railway.app"
 ]
 import sys
 
