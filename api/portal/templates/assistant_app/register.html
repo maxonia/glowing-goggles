@@ -176,14 +176,22 @@ label[for="consent"] {
 </div>
 <div class="register-form-container">
     <div class="register-title">Регистрация аккаунта</div>
-<form method="post" class="register-form">
+ <form method="post" class="register-form">
     {% csrf_token %}
-    {{ form.username.label_tag }}{{ form.username }}<br>
+
+    <label for="{{ form.username.id_for_label }}">Логин</label>{{ form.username }}<br>
     {{ form.email.label_tag }}{{ form.email }}<br>
     {{ form.first_name.label_tag }}{{ form.first_name }}<br>
     {{ form.last_name.label_tag }}{{ form.last_name }}<br>
     {{ form.password.label_tag }}{{ form.password }}<br>
-    {{ form.consent }} {{ form.consent.label_tag }}<br>
+
+    <!-- Новый блок согласия -->
+    <label for="{{ form.consent.id_for_label }}">
+        Я соглашаюсь с
+        <a href="https://www.yourcompany.ru/policy" target="_blank">Политикой обработки персональных данных</a>
+    </label>
+    {{ form.consent }}<br>
+
     {% if form.errors %}
       <ul>
          {% for field in form %}
