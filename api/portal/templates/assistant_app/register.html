@@ -188,7 +188,7 @@ label[for="consent"] {
     <!-- Новый блок согласия -->
     <label for="{{ form.consent.id_for_label }}">
         Я соглашаюсь с
-        <a href="/templates/policy.html" target="_blank">Политикой обработки персональных данных</a>
+        <a href="{% url 'policy' %}" target="_blank">Политикой обработки персональных данных</a>
     </label>
     {{ form.consent }}<br>
 
