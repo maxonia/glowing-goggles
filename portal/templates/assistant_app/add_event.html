@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Добавить событие</title>
+</head>
+<body>
+    <h1>Добавить событие</h1>
+    <form method="post">
+        {% csrf_token %}
+        <!-- Добавьте сюда поля формы для события -->
+        <input type="submit" value="Создать событие">
+    </form>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!-- profile.html -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Профиль</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Мобильная адаптация и стиль – вставь сюда свой CSS, как для форм/карточек */
+        body { font-family: Arial, sans-serif; background: #fffdf6; margin: 0;}
+        .profile-container {
+            max-width: 400px;
+            margin: 50px auto 0 auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 24px 0 rgba(0,0,0,0.08);
+            padding: 32px 22px;
+        }
+        .profile-title {
+            font-size: 1.4rem;
+            color: #ff9800;
+            font-weight: bold;
+            margin-bottom: 18px;
+            text-align: center;
+        }
+        .profile-info {
+            font-size: 1.09rem;
+            color: #444;
+            margin-bottom: 9px;
+        }
+        .profile-label {
+            color: #909090;
+            font-size: 1em;
+            margin-right: 6px;
+        }
+        .logout-btn {
+            width: 100%;
+            background: #b02a37;
+            color: #fff;
+            border: none;
+            padding: 13px;
+            font-size: 1.1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 33px;
+            transition: background .15s;
+        }
+        .logout-btn:hover {
+            background: #ff9800;
+            color: #fff;
+        }
+                        .footer-menu {
+            position: fixed;
+            left: 0; bottom: 0; width: 100%;
+            background: #ffae38;
+            border-radius: 0 0 10px 10px;
+            display: flex; justify-content: center;
+            box-shadow: 0 -3px 14px rgba(254,147,0,0.05);
+            z-index: 99;
+        }
+        .footer-menu nav {width: 100%; display: flex;}
+        .footer-menu button {
+            background: none; border: none; flex: 1;
+            padding: 12px 0; color: #fff; text-align: center;
+            font-size: 1em; cursor: pointer;
+        }
+        .footer-menu button .icon {display: block; font-size: 1.5em;}
+        .footer-menu button.selected {
+            background: #ffa400;
+            border-radius: 8px 8px 0 0;
+        }
+    </style>
+</head>
+<body>
+<div class="profile-container">
+    <div class="profile-title">Ваш профиль</div>
+    <div class="profile-info"><span class="profile-label">Логин:</span> {{ user.username }}</div>
+    <div class="profile-info"><span class="profile-label">ФИО:</span> {{ user.last_name }} {{ user.first_name }}</div>
+    <div class="profile-info"><span class="profile-label">Email:</span> {{ user.email }}</div>
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="logout-btn">Выйти из аккаунта</button>
+    </form>
+</div>
+</body>
+</html>
+<footer class="footer-menu">
+        <nav>
+            <button onclick="window.location.href='{% url 'index' %}'">
+                <span class="icon">&#8962;</span>
+                Главный
+            </button>
+            <button onclick="window.location.href='{% url 'notes_list' %}'">
+                <span class="icon">&#128197;</span>
+                Заметки
+            </button>
+            <button onclick="window.location.href='{% url 'tasks' %}'">
+                <span class="icon">&#9776;</span>
+                Задачи
+            </button>
+            <button onclick="window.location.href='{% url 'profile' %}'">
+                <span class="icon">&#128100;</span>
+                Кабинет
+            </button>
+        </nav>
+    </footer>
+</html>

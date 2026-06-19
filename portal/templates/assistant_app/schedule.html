@@ -1,0 +1,154 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Расписание | Ассистент</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <style>
+       body { font-family: Arial, sans-serif; background: #fffdf6; margin: 0;}
+        .schedule-wrapper {
+            max-width: 480px;
+            margin: 40px auto 0 auto;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 6px 24px rgba(254,147,0,0.07), 0 1.5px 4px rgba(0,0,0,0.07);
+            padding: 32px 28px 24px 28px;
+        }
+        .schedule-header {
+            font-size: 1.7em;
+            color: #fe9300;
+            font-weight: 800;
+            margin-bottom: 24px;
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 18px;
+        }
+        .schedule-table th, .schedule-table td {
+            padding: 14px 9px;
+            border-bottom: 1px solid #ffe2ae;
+            font-size: 1.06em;
+            text-align: left;
+        }
+        .schedule-table th {
+            color: #ffae38;
+            background: #fff6e3;
+            font-weight: 700;
+            text-align: left;
+        }
+        .schedule-table tr:hover td {
+            background: #fff3d0;
+            transition: 0.15s;
+        }
+        .btn-accent {
+            display: inline-block;
+            margin-top: 12px;
+            background: linear-gradient(90deg,#fe9300 40%,#ffae38 100%);
+            color: #fff;
+            border: none;
+            padding: 11px 26px;
+            font-weight: 600;
+            border-radius: 9px;
+            font-size: 1em;
+            cursor: pointer;
+            box-shadow: 0 2px 7px rgba(254,147,0,0.12);
+            transition: background 0.16s;
+        }
+        .btn-accent:hover {
+            background: #ffae38;
+        }
+        .event-description {
+            color: #a57a3d;
+            font-size: 0.98em;
+        }
+        /* Футер как на главной */
+        .footer-menu {
+            position: fixed;
+            left: 0; bottom: 0; width: 100%;
+            background: #ffae38;
+            border-radius: 0 0 10px 10px;
+            display: flex; justify-content: center;
+            box-shadow: 0 -3px 14px rgba(254,147,0,0.05);
+            z-index: 99;
+        }
+        .footer-menu nav {width: 100%; display: flex;}
+        .footer-menu button {
+            background: none; border: none; flex: 1;
+            padding: 12px 0; color: #fff; text-align: center;
+            font-size: 1em; cursor: pointer;
+        }
+        .footer-menu button .icon {display: block; font-size: 1.5em;}
+        .footer-menu button.selected {
+            background: #ffa400;
+            border-radius: 8px 8px 0 0;
+        }
+           .header-bar {
+            width: 100%;
+            background: #ff9800;
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.3rem;
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+ <div class="header-bar">
+        Ассистент
+    </div>
+    <div class="schedule-wrapper">
+        <div class="schedule-header">Расписание</div>
+        <table class="schedule-table">
+            <tr>
+                <th>Дата</th>
+                <th>Время</th>
+                <th>Событие</th>
+            </tr>
+            {% for event in events %}
+            <tr>
+                <td>{{ event.date|date:'d.m.Y' }}</td>
+                <td>{{ event.time|default:"—" }}</td>
+                <td>
+                    <strong>{{ event.title }}</strong>
+                    {% if event.description %}<div class="event-description">{{ event.description }}</div>{% endif %}
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3" style="text-align: center; color: #ffae38;">На этот период событий нет.</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <a href="#" class="btn-accent">+ Добавить событие</a>
+    </div>
+
+    <footer class="footer-menu">
+        <nav>
+            <button onclick="window.location.href='{% url 'index' %}'">
+                <span class="icon">&#8962;</span>
+                Главная
+            </button>
+            <button onclick="window.location.href='{% url 'schedule' %}'" class="selected">
+                <span class="icon">&#128197;</span>
+                Расписание
+            </button>
+            <button onclick="window.location.href='{% url 'tasks' %}'">
+                <span class="icon">&#9776;</span>
+                Задачи
+            </button>
+            <button onclick="window.location.href='{% url 'profile' %}'">
+                <span class="icon">&#128100;</span>
+                Кабинет
+            </button>
+        </nav>
+    </footer>
+</body>
+</html>
